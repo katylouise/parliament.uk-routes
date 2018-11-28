@@ -3,5 +3,5 @@ sudo: required
 language: generic
 
 script:
+  - make version_check
   - make test
-  - make check_version

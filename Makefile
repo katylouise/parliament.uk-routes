@@ -22,7 +22,7 @@ test:
 	@bundle install
 	@rspec
 
-check_version:
+version_check:
     ifeq ($(VERSION), $(REL_TAG))
         $(error The version is currently $(VERSION) and the last release was $(REL_TAG).  You need to bump the version)
     endif
