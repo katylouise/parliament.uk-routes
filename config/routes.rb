@@ -38,8 +38,8 @@ Rails.application.routes.draw do
   get '/proposed-negative-statutory-instruments/:proposed_negative_statutory_instrument_id', to: 'proposed_negative_statutory_instruments#show', as: :proposed_negative_statutory_instrument
 
   ### Statutory Instruments ###
-  get '/statutory-instruments', to: 'statutory_instruments#index', as: :statutory_instruments
-  get '/statutory-instruments/:statutory_instrument_id', to: 'statutory_instruments#show', as: :statutory_instrument
+  # get '/statutory-instruments', to: 'statutory_instruments#index', as: :statutory_instruments
+  # get '/statutory-instruments/:statutory_instrument_id', to: 'statutory_instruments#show', as: :statutory_instrument
 
   ### Articles ###
   get '/articles/:article_id', to: 'articles#show', article_id: id_format_regex, as: :article
@@ -670,5 +670,16 @@ Rails.application.routes.draw do
     scope '/:laid_paper_id' do
       get '/', to: 'laid_papers#show'
     end
+  end
+
+  scope '/statutory-instruments', as: 'statutory_instruments' do
+    build_default_routes('statutory_instruments', current: false, lookup: true, postcode: false)
+  end
+
+  scope '/statutory-instruments', as: 'statutory_instrument' do
+    scope '/work-packages', as: 'work_packages' do
+      get '/', to: 'statutory_instruments#work_packages'
+    end
+    get '/:statutory_instrument_id', to: 'statutory_instruments#show'
   end
 end
